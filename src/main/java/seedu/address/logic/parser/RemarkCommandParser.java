@@ -21,20 +21,18 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
      */
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
 
         Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), pe);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RemarkCommand.MESSAGE_USAGE), ive);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_REMARK);
+        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
 
-        String remark = argMultimap.getValue(PREFIX_REMARK).get();
         return new RemarkCommand(index, remark);
     }
 
