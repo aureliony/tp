@@ -7,11 +7,24 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
+
+    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values";
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "(?s).*";
+
     public final String value;
 
     public Remark(String remark) {
         requireNonNull(remark);
         value = remark;
+    }
+
+    public static boolean isValidRemark(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
