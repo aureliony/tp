@@ -10,9 +10,8 @@
         "tang-yetong": "Tang Yetong",
         "leong-heng-yew": "Leong Heng Yew",
         "yee-jun-hyeok-bryan": "Yee Jun Hyeok Bryan",
-        "johnny-doe": "Johnny Doe",
-        "jean-doe": "Jean Doe",
-        "james-doe": "James Doe"
+        "muhammad-rizki-bayuaji": "Muhammad Rizki Bayuaji",
+        "guk-yi-siong": "Guk Yi Siong"
       },
       "headingKeywords": {}
     },
@@ -153,6 +152,14 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/darkvoid32.md",
+      "title": "Tang Yetong's Project Portfolio Page",
+      "headings": {
+        "project-assetbook3": "Project: AssetBook3"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
@@ -161,10 +168,18 @@
       "headingKeywords": {}
     },
     {
-      "src": "team/tangyetong.md",
-      "title": "Tang Yetong's Project Portfolio Page",
+      "src": "team/rizkidelta.md",
+      "title": "Muhammad Rizki Bayuaji's Project Portfolio Page",
       "headings": {
-        "project-sponsortracker": "Project: SponsorTracker"
+        "project-assetbook3": "Project: AssetBook3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/yisiox.md",
+      "title": "Guk Yi Siong's Project Portfolio Page",
+      "headings": {
+        "project-assetbook3": "Project: AssetBook3"
       },
       "headingKeywords": {}
     },
