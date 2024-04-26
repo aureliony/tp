@@ -168,3 +168,11 @@ h5,
 h6 {
   color: #e46c0a;
 }
+
+<style>
+  .step {
+  }
+  .sub-step {
+    margin-left: 1.5em;
+  }
+</style>

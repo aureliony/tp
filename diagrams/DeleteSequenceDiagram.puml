@@ -5,14 +5,11 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "<<class>>\nCommandType" as CommandTypeClass LOGIC_COLOR
-participant "t:CommandType" as CommandType LOGIC_COLOR
-participant "<<class>>\nDeleteCommand" as DeleteCommandClass LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "command:DeleteCommand" as DeleteCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "m:Model" as Model MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete 1")
@@ -21,43 +18,25 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("delete 1")
 activate AddressBookParser
 
-AddressBookParser -> CommandTypeClass : valueOf("DELETE")
-activate CommandTypeClass
-
-create CommandType
-CommandTypeClass -> CommandType
-activate CommandType
-
-CommandType -> CommandTypeClass : t
-deactivate CommandType
-
-CommandTypeClass -> AddressBookParser : t
-deactivate CommandTypeClass
-
-AddressBookParser -> CommandType : createCommand()
-activate CommandType
-
-CommandType -> DeleteCommandClass : of("1")
-activate DeleteCommandClass
+' Abstracted factory method call
+AddressBookParser -> AddressBookParser : createCommandUsingFactory("delete 1")
+note right: createCommandUsingFactory() is a fictitious command \n representing the command creation process for brevity
+activate AddressBookParser
 
 create DeleteCommand
-DeleteCommandClass -> DeleteCommand
+AddressBookParser -> DeleteCommand
 activate DeleteCommand
 
-DeleteCommand --> DeleteCommandClass : d
+DeleteCommand --> AddressBookParser : command
 deactivate DeleteCommand
 
-DeleteCommandClass --> CommandType : d
-deactivate DeleteCommandClass
-
-CommandType --> AddressBookParser : d
-deactivate CommandType
-
-AddressBookParser --> LogicManager : d
+AddressBookParser --> AddressBookParser : command
 deactivate AddressBookParser
 
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
+LogicManager -> DeleteCommand : execute(model)
 activate DeleteCommand
 
 DeleteCommand -> Model : deletePerson(1)
@@ -69,6 +48,9 @@ deactivate Model
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 
-[<--LogicManager
+DeleteCommand -[hidden]-> LogicManager
+destroy DeleteCommand
+
+[<--LogicManager : result
 deactivate LogicManager
 @enduml
